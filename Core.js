@@ -33,16 +33,6 @@ class Core {
         this.#canvasView.height = this.#height;
         this.#canvasBuffer.width = this.#width;
         this.#canvasBuffer.height = this.#height;
-        
-        window.onresize = function() {
-            this.#width = window.innerWidth;
-            this.#height = window.innerHeight;
-            
-            this.#canvasView.width = this.#width;
-            this.#canvasView.height = this.#height;
-            this.#canvasBuffer.width = this.#width;
-            this.#canvasBuffer.height = this.#height;
-        }
 
         TimeManager.getInstance().init();
         KeyManager.getInstance().init();
@@ -84,13 +74,23 @@ class Core {
         this.#ctxView.drawImage(this.#canvasBuffer, 0, 0);
     }
 
-
+    OnResizeWindow() {
+        this.#width = window.innerWidth;
+        this.#height = window.innerHeight;
+        
+        this.#canvasView.width = this.#width;
+        this.#canvasView.height = this.#height;
+        this.#canvasBuffer.width = this.#width;
+        this.#canvasBuffer.height = this.#height;
+    }
 }
 
 window.onload = function() {
     let canvasView = document.getElementById('game');
     let core = new Core(canvasView);
     core.init();
+    
+    window.onresize = () => core.OnResizeWindow();
 
     setInterval(() => core.update(), 1000 / 60);
 }
