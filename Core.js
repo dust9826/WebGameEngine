@@ -34,6 +34,16 @@ class Core {
         this.#canvasBuffer.width = this.#width;
         this.#canvasBuffer.height = this.#height;
         
+        window.onload = function() {
+            this.#width = window.innerWidth;
+            this.#height = window.innerHeight;
+            
+            this.#canvasView.width = this.#width;
+            this.#canvasView.height = this.#height;
+            this.#canvasBuffer.width = this.#width;
+            this.#canvasBuffer.height = this.#height;
+        }
+
         TimeManager.getInstance().init();
         KeyManager.getInstance().init();
         
@@ -44,17 +54,19 @@ class Core {
         TimeManager.getInstance().update();
         KeyManager.getInstance().update();
 
+        const speed = 300;
+
         if( KeyManager.getInstance().getKeyState(Key.W) == KeyState.HOLD)
-            this.#y -= TimeManager.getInstance().DT * 30;
+            this.#y -= TimeManager.getInstance().DT * speed;
             
         if( KeyManager.getInstance().getKeyState(Key.S) == KeyState.HOLD)
-            this.#y += TimeManager.getInstance().DT * 30;
+            this.#y += TimeManager.getInstance().DT * speed;
             
         if( KeyManager.getInstance().getKeyState(Key.A) == KeyState.HOLD)
-            this.#x -= TimeManager.getInstance().DT * 30;
+            this.#x -= TimeManager.getInstance().DT * speed;
             
         if( KeyManager.getInstance().getKeyState(Key.D) == KeyState.HOLD)
-            this.#x += TimeManager.getInstance().DT * 30;
+            this.#x += TimeManager.getInstance().DT * speed;
 
         this.render();
     }
