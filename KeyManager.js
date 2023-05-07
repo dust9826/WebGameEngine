@@ -23,15 +23,13 @@ export default class KeyManager {
         for(let keyCode in Key)
         {
             this.#arrKey[Key[keyCode]] = new KeyInfo();
+            this.#isKeyDown[key] = false;
         }
     }
 
     update() {
         for(let key in this.#arrKey)
         {
-            console.log(key);
-            console.log(this.#isKeyDown[key]);
-            console.log(this.#arrKey[key]);
             if(this.#isKeyDown[key] == true)
             {
                 if(this.#arrKey[key].bPrevPush == true)
@@ -48,11 +46,11 @@ export default class KeyManager {
             {
                 if(this.#arrKey[key].bPrevPush == false)
                 {
-                    this.#arrKey[key].eState = KeyState.AWAY;
+                    this.#arrKey[key].eState = KeyState.NONE;
                 }
                 else
                 {
-                    this.#arrKey[key].eState = KeyState.UP;
+                    this.#arrKey[key].eState = KeyState.AWAY;
                 }
                 this.#arrKey[key].bPrevPush = false;
             }
@@ -85,11 +83,11 @@ class KeyInfo {
     }
 }
 
-const KeyState = {
+export const KeyState = {
   NONE : Symbol(0),
   TAP : Symbol(1),
   HOLD : Symbol(2),
-  AWAY : Symbol(2),
+  AWAY : Symbol(3),
 };
 
 export const Key = {

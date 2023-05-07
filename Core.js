@@ -1,6 +1,6 @@
 import TimeManager from './TimeManager.js';
 import KeyManager from './KeyManager.js';
-import {Key} from './KeyManager.js';
+import {Key, KeyState} from './KeyManager.js';
 
 class Core {
     #canvasView;
@@ -12,6 +12,7 @@ class Core {
     #height;
 
     #x;
+    #y;
 
     constructor(canvasView) {
         this.#canvasView = canvasView;
@@ -23,7 +24,8 @@ class Core {
         this.#width = window.innerWidth;
         this.#height = window.innerHeight;
 
-        this.#x = 0;
+        this.#x = this.#width / 2;
+        this.#y = this.#height / 2;
     }
 
     init() {
@@ -31,6 +33,15 @@ class Core {
         this.#canvasView.height = this.#height;
         this.#canvasBuffer.width = this.#width;
         this.#canvasBuffer.height = this.#height;
+
+        window.onresize = function() {
+            this.#width = window.innerWidth;
+            this.#height = window.innerHeight;
+            this.#canvasView.width = this.#width;
+            this.#canvasView.height = this.#height;
+            this.#canvasBuffer.width = this.#width;
+            this.#canvasBuffer.height = this.#height;
+        }
         
         TimeManager.getInstance().init();
         KeyManager.getInstance().init();
@@ -41,7 +52,27 @@ class Core {
     update() {
         TimeManager.getInstance().update();
         KeyManager.getInstance().update();
-        this.#x = this.#x + TimeManager.getInstance().DT * 10;
+
+        if(KeyManager.getInstance().getKeyState(Key.D) === KeyState.HOLD)
+        {
+            this.#x += TimeManager.getInstance().DT * 30;
+        }
+
+        if(KeyManager.getInstance().getKeyState(Key.A) === KeyState.HOLD)
+        {
+            this.#x -= TimeManager.getInstance().DT * 30;
+        }
+
+        if(KeyManager.getInstance().getKeyState(Key.S) === KeyState.HOLD)
+        {
+            this.#y += TimeManager.getInstance().DT * 30;
+        }
+
+        if(KeyManager.getInstance().getKeyState(Key.W) === KeyState.HOLD)
+        {
+            this.#y -= TimeManager.getInstance().DT * 30;
+        }
+
         console.log(KeyManager.getInstance().getKey(Key.A));
         this.render();
     }
@@ -51,7 +82,7 @@ class Core {
 
         this.#ctxBuffer.clearRect(0, 0, this.#width, this.#height);
         this.#ctxBuffer.beginPath();
-        this.#ctxBuffer.fillRect(20, 20 + this.#x, 50, 50);
+        this.#ctxBuffer.fillRect(this.#y, this.#x, 50, 50);
         this.#ctxBuffer.stroke();
 
         // double buffering
