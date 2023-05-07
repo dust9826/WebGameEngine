@@ -58,7 +58,6 @@ export default class KeyManager {
     }
 
     getKeyState(keyCode) {
-        console.log(keyCode);
         return this.#arrKey[keyCode].eState;
     }
 
