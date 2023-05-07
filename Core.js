@@ -34,7 +34,7 @@ class Core {
         this.#canvasBuffer.width = this.#width;
         this.#canvasBuffer.height = this.#height;
         
-        window.onload = function() {
+        window.onresize = function() {
             this.#width = window.innerWidth;
             this.#height = window.innerHeight;
             
