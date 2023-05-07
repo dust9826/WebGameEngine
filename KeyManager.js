@@ -23,7 +23,7 @@ export default class KeyManager {
         for(let keyCode in Key)
         {
             this.#arrKey[Key[keyCode]] = new KeyInfo();
-            this.#isKeyDown[key] = false;
+            this.#isKeyDown[Key[keyCode]] = false;
         }
     }
 
