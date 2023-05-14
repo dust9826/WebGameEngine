@@ -18,7 +18,8 @@ export default class Missile extends GameObject  {
 
     update() {
         const speed = 300;
-        let dir = this.#direction;
+        let dir = new Vec2();
+        dir.set(this.#direction.x, this.#direction.y);
         this.position.add(dir.multi(speed * TimeManager.getInstance().DT));
     }
 
