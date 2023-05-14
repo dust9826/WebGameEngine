@@ -19,7 +19,6 @@ export default class GameObject {
     }
 
     render(ctx) {
-        console.log(this);
         ctx.drawImage(this.#img
             , this.#position.x - this.#scale.x / 2
             , this.#position.y - this.#scale.y / 2

@@ -8,6 +8,10 @@ export default class Player extends GameObject  {
         super();
     }
 
+    init() {
+        super.init();
+    }
+
     update() {
 
         const speed = 300;
@@ -23,5 +27,9 @@ export default class Player extends GameObject  {
             
         if( KeyManager.getInstance().getKeyState(Key.D) == KeyState.HOLD)
             this.position.x += TimeManager.getInstance().DT * speed;
+    }
+
+    render(ctx) {
+        super.render(ctx);
     }
 }
