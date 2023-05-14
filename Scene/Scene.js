@@ -3,7 +3,7 @@ import {ObjectType} from '../GameObject.js';
 
 export default class Scene {
     
-    #arrGameObject;
+    #arrGameObject = [];
     
     constructor() {
         for(let type in ObjectType) {
