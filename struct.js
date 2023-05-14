@@ -16,7 +16,19 @@ export class Vec2 {
         {
             this.x = 1;
         }
+        return this;
     }
+    add(a) {
+        this.x += a.x;
+        this.y += a.y;
+        return this;
+    }
+    multi(a) {
+        this.x *= a;
+        this.y *= a;
+        return this;
+    }
+
 
     static GetDiff(a, b) {
         let tmp = new Vec2();

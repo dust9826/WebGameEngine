@@ -18,8 +18,8 @@ export default class Missile extends GameObject  {
 
     update() {
         const speed = 300;
-
-        this.position += this.#direction * speed * TimeManager.getInstance().DT;
+        
+        this.position.add(this.#direction.multi(speed * TimeManager.getInstance().DT));
     }
 
     lateupdate() {
@@ -31,5 +31,5 @@ export default class Missile extends GameObject  {
     }
 
     get direction() {return this.#direction;}
-    set direction(value) {console.log(value);this.#direction = value.normalize();console.log(value);}
+    set direction(value) {value.normalize;this.#direction = value;}
 }
