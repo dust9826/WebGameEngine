@@ -2,6 +2,7 @@ import KeyManager from './KeyManager.js';
 import {Key, KeyState} from './KeyManager.js';
 import GameObject from './GameObject.js';
 import {ObjectType} from './GameObject.js';
+import {Vec2} from './struct.js';
 import TimeManager from './TimeManager.js';
 import Missile from './Missile.js';
 import SceneManager from './SceneManager.js'
@@ -55,8 +56,7 @@ export default class Player extends GameObject  {
 
     shootMissile() {
         let missile = new Missile();
-        missile.direction = KeyManager.getInstance().getMousePosition() - this.position;
-        missile.direction.normalize();
+        missile.direction = Vec2.GetDiff(KeyManager.getInstance().getMousePosition(), this.position);
 
         SceneManager.getInstance().getCurrentScene().AddObject(missile, ObjectType.MISSILE);
     }
