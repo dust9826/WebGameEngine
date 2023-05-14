@@ -3,6 +3,9 @@ export default class KeyManager {
 
     #isKeyDown = [];
     #arrKey = [];
+    #isMouseDown;
+    #mouseState;
+    #mousePosition;
 
     constructor() {
         if(KeyManager.#instance) return KeyManager.#instance;
@@ -19,12 +22,19 @@ export default class KeyManager {
     init() {
         window.addEventListener('keydown', (e) => this.OnKeyDown(e));
         window.addEventListener('keyup', (e) => this.OnKeyUp(e));
+        window.addEventListener('mousedown', (e) => this.OnMouseDown(e));
+        window.addEventListener('mouseup', (e) => this.OnMouseUp(e));
+        window.addEventListener('mousemove', (e) => this.OnMouseMove(e));
 
         for(let keyCode in Key)
         {
             this.#arrKey[Key[keyCode]] = new KeyInfo();
             this.#isKeyDown[Key[keyCode]] = false;
         }
+
+        this.#mouseState = new KeyInfo();
+        this.#isMouseDown = false;
+        this.#mousePosition = new Vec2();
     }
 
     update() {
@@ -55,6 +65,31 @@ export default class KeyManager {
                 this.#arrKey[key].bPrevPush = false;
             }
         }
+
+        if(this.#isMouseDown == true)
+        {
+            if(this.#mouseState.bPrevPush == true)
+            {
+                this.#mouseState.eState = KeyState.HOLD;
+            }
+            else
+            {
+                this.#mouseState.eState = KeyState.TAP;
+            }
+            this.#mouseState.bPrevPush = true;
+        }
+        else
+        {
+            if(this.#mouseState.bPrevPush == false)
+            {
+                this.#mouseState.eState = KeyState.NONE;
+            }
+            else
+            {
+                this.#mouseState.eState = KeyState.AWAY;
+            }
+            this.#mouseState.bPrevPush = false;
+        }
     }
 
     getKeyState(keyCode) {
@@ -64,11 +99,20 @@ export default class KeyManager {
     OnKeyDown(e) {
         if(e.key === 'Tab') e.preventDefault();
         this.#isKeyDown[e.key] = true;
-        //console.log(e);
     }
-
     OnKeyUp(e) {
         this.#isKeyDown[e.key] = false;
+    }
+    OnMouseDown(e) {
+        console.log(e);
+        this.#isMouseDown = true;
+    }
+    OnMouseUp(e) {
+        console.log(e);
+        this.#isMouseDown = false;
+    }
+    OnMouseMove(e) {
+        console.log(e);
     }
 }
 

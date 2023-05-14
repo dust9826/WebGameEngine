@@ -8,7 +8,7 @@ export default class GameObject {
     constructor() {}
 
     init() {
-        this.#img.src = './object.png';
+        this.#img.src = './Image/box.png';
         this.#position = {x: 100, y: 100};
         this.#scale = {x:64, y:64};
         console.log(this);
