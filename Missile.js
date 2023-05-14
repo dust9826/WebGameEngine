@@ -2,6 +2,7 @@ import KeyManager from './KeyManager.js';
 import {Key, KeyState} from './KeyManager.js';
 import GameObject from './GameObject.js';
 import TimeManager from './TimeManager.js';
+import {Vec2} from './struct.js';
 
 export default class Missile extends GameObject  {
     #direction = new Vec2();
