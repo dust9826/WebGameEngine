@@ -13,6 +13,7 @@ export default class Missile extends GameObject  {
 
     init() {
         super.init();
+        this.#direction.x = 1;
     }
 
     update() {
@@ -30,5 +31,5 @@ export default class Missile extends GameObject  {
     }
 
     get direction() {return this.#direction;}
-    set direction(value) {this.#direction = value.normalize();console.log(this.#direction);}
+    set direction(value) {console.log(value);this.#direction = value.normalize();console.log(value);}
 }
