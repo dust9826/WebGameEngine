@@ -13,29 +13,29 @@ export default class Scene {
 
     Enter() {}
     init() {
-        for(let type of ObjectType) {
-            for(let obj of this.#arrGameObject[type]) {
+        for(let type in ObjectType) {
+            for(let obj of this.#arrGameObject[ObjectType[type]]) {
                 obj.init();
             }
         }
     }
     update() {
-        for(let type of ObjectType) {
-            for(let obj of this.#arrGameObject[type]) {
+        for(let type in ObjectType) {
+            for(let obj of this.#arrGameObject[ObjectType[type]]) {
                 obj.update();
             }
         }
     }
     lateupdate() {
-        for(let type of ObjectType) {
-            for(let obj of this.#arrGameObject[type]) {
+        for(let type in ObjectType) {
+            for(let obj of this.#arrGameObject[ObjectType[type]]) {
                 obj.lateupdate();
             }
         }
     }
     render(ctx) {
-        for(let type of ObjectType) {
-            for(let obj of this.#arrGameObject[type]) {
+        for(let type in ObjectType) {
+            for(let obj of this.#arrGameObject[ObjectType[type]]) {
                 obj.render(ctx);
             }
         }
