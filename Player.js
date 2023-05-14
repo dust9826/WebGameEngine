@@ -9,6 +9,7 @@ export default class Player extends GameObject  {
     }
 
     init() {
+        console.log(this);
         super.init();
         console.log(this);
     }

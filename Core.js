@@ -41,6 +41,7 @@ class Core {
         KeyManager.getInstance().init();
         
         this.player = new Player();
+        this.player.init();
 
         console.log('Init Core');
     }
