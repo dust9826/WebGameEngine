@@ -69,7 +69,6 @@ export default class KeyManager {
 
     OnKeyUp(e) {
         this.#isKeyDown[e.key] = false;
-        console.log(e);
     }
 }
 

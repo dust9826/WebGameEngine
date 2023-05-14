@@ -55,8 +55,6 @@ class Core {
     }
 
     render() {
-        console.log('run render');
-
         this.#ctxBuffer.clearRect(0, 0, this.#width, this.#height);
 
         this.player.render(this.#ctxBuffer);

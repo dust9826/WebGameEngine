@@ -31,5 +31,6 @@ export default class Player extends GameObject  {
 
     render(ctx) {
         super.render(ctx);
+        console.log(this);
     }
 }
