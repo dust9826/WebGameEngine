@@ -1,6 +1,6 @@
 export class Vec2 {
-    x;
-    y;
+    x = 0;
+    y = 0;
     
     length() {
         return Math.sqrt(this.x*this.x + this.y*this.y);

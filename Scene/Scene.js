@@ -45,4 +45,8 @@ export default class Scene {
     AddObject(gameObj, type) {
         this.#arrGameObject[type].push(gameObj);
     }
+
+    GetObjectByType(type) {
+        return this.#arrGameObject[type];
+    }
 }
