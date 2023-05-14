@@ -1,19 +1,19 @@
 export default class TimeManager {
     static #instance;
 
+    static getInstance() {
+        if(TimeManager.#instance === undefined) {
+            TimeManager.#instance = new TimeManager();
+        }
+        return TimeManager.#instance;
+    }
+
     #preTime;
     #deltaTime;
 
     constructor() {
         if(TimeManager.#instance) return TimeManager.#instance;
         TimeManager.#instance = this; 
-    }
-
-    static getInstance() {
-        if(TimeManager.#instance === undefined) {
-            TimeManager.#instance = new TimeManager();
-        }
-        return TimeManager.#instance;
     }
 
     init() {
