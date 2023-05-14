@@ -98,6 +98,14 @@ export default class KeyManager {
         return this.#arrKey[keyCode].eState;
     }
 
+    getMouseState() {
+        return this.#mouseState.eState;
+    }
+
+    getMosuePosition() {
+        return this.#mousePosition;
+    }
+
     OnKeyDown(e) {
         if(e.key === 'Tab') e.preventDefault();
         this.#isKeyDown[e.key] = true;

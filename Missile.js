@@ -27,4 +27,7 @@ export default class Missile extends GameObject  {
     render(ctx) {
         super.render(ctx);
     }
+
+    get direction() {return this.#direction;}
+    set direction(value) {this.#direction = value;}
 }
