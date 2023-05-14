@@ -10,6 +10,7 @@ export default class Player extends GameObject  {
 
     init() {
         super.init();
+        console.log(this);
     }
 
     update() {
@@ -31,6 +32,5 @@ export default class Player extends GameObject  {
 
     render(ctx) {
         super.render(ctx);
-        console.log(this);
     }
 }

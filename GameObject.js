@@ -11,6 +11,7 @@ export default class GameObject {
         this.#img.src = './object.png';
         this.#position = {x: 100, y: 100};
         this.#scale = {x:64, y:64};
+        console.log(this);
     }
     
     update() {
