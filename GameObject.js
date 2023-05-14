@@ -37,3 +37,11 @@ export default class GameObject {
     get img() {return this.#img;}
     set img(value) {this.#img = value;}
 }
+
+export const ObjectType = {
+    PLAYER : Symbol(0),
+    ENEMY : Symbol(1),
+    MISSILE : Symbol(2),
+    TILE : Symbol(3),
+    UI : Symbol(31),
+}

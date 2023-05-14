@@ -1,7 +1,7 @@
 import TimeManager from './TimeManager.js';
 import KeyManager from './KeyManager.js';
 import {Key, KeyState} from './KeyManager.js';
-import Player from './Player.js';
+import SceneManager from './SceneManager.js';
 
 class Core {
     #canvasView;
@@ -14,8 +14,6 @@ class Core {
 
     #x;
   	#y;
-
-    player;
 
     constructor(canvasView) {
         this.#canvasView = canvasView;
@@ -39,10 +37,8 @@ class Core {
 
         TimeManager.getInstance().init();
         KeyManager.getInstance().init();
+        SceneManager.getInstance().init();
         
-        this.player = new Player();
-        this.player.init();
-
         console.log('Init Core');
     }
 
@@ -50,7 +46,7 @@ class Core {
         TimeManager.getInstance().update();
         KeyManager.getInstance().update();
 
-        this.player.update();
+        SceneManager.getInstance().update();
 
         this.render();
     }
@@ -58,7 +54,7 @@ class Core {
     render() {
         this.#ctxBuffer.clearRect(0, 0, this.#width, this.#height);
 
-        this.player.render(this.#ctxBuffer);
+        SceneManager.getInstance().render(ctx);
 
         // double buffering
         this.#ctxView.clearRect(0, 0, this.#width, this.#height);
