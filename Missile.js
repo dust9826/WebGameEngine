@@ -17,10 +17,9 @@ export default class Missile extends GameObject  {
     }
 
     update() {
-        const speed = 3;
-        console.log(this.#direction);
-        console.log(speed * TimeManager.getInstance().DT);
-        this.position.add(this.#direction.multi(speed * TimeManager.getInstance().DT));
+        const speed = 300;
+        let dir = this.#direction;
+        this.position.add(dir.multi(speed * TimeManager.getInstance().DT));
     }
 
     lateupdate() {
