@@ -1,7 +1,7 @@
 import TimeManager from './TimeManager.js';
 import KeyManager from './KeyManager.js';
 import {Key, KeyState} from './KeyManager.js';
-import Player from './Player';
+import Player from './Player.js';
 
 class Core {
     #canvasView;
