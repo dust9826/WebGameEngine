@@ -23,6 +23,7 @@ export default class Scene {
         for(let type in ObjectType) {
             for(let obj in this.#arrGameObject[ObjectType[type]]) {
                 obj.update();
+                console.log(this);
             }
         }
     }

@@ -10,7 +10,7 @@ export default class StartScene extends Scene {
         let player = new Player();
         super.AddObject(player, ObjectType.PLAYER);
 
-        console.log(this);
+        this.init();
     }
     init() {super.init();}
     update() {super.update();}
