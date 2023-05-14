@@ -1,3 +1,5 @@
+import {Vec2} from './struct.js';
+
 export default class KeyManager {
     static #instance;
 
@@ -104,15 +106,16 @@ export default class KeyManager {
         this.#isKeyDown[e.key] = false;
     }
     OnMouseDown(e) {
-        console.log(e);
         this.#isMouseDown = true;
     }
     OnMouseUp(e) {
-        console.log(e);
         this.#isMouseDown = false;
     }
     OnMouseMove(e) {
-        console.log(e);
+        this.#mousePosition = {
+            x: e.clientX,
+            y: e.clientY
+        }
     }
 }
 
