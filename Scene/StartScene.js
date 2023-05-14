@@ -4,11 +4,13 @@ import {ObjectType} from '../GameObject.js'
 
 export default class StartScene {
     
-    constructor() {}
+    constructor() {super();}
 
     Enter() {
         let player = new Player();
         super.AddObject(player, ObjectType.PLAYER);
+
+        console.log(this);
     }
     init() {super.init();}
     update() {super.update();}

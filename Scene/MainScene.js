@@ -3,7 +3,7 @@ import Player from '../Player.js'
 
 export default class MainScene {
     
-    constructor() {}
+    constructor() {super();}
 
     Enter() {}
     update() {}
