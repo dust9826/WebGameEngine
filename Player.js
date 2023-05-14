@@ -11,11 +11,11 @@ import Scene from './Scene/Scene.js'
 export default class Player extends GameObject  {
     constructor() {
         super();
-        this.img.src = './Image/cat.png';
     }
 
     init() {
         super.init();
+        this.img.src = './Image/cat.png';
     }
 
     update() {

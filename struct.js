@@ -18,6 +18,10 @@ export class Vec2 {
         }
         return this;
     }
+    set(x, y) {
+        this.x = x;
+        this.y = y;
+    }
     add(a) {
         this.x += a.x;
         this.y += a.y;
