@@ -58,9 +58,6 @@ class Core {
         console.log('run render');
 
         this.#ctxBuffer.clearRect(0, 0, this.#width, this.#height);
-        this.#ctxBuffer.beginPath();
-        this.#ctxBuffer.fillRect(this.#x, this.#y, 50, 50);
-        this.#ctxBuffer.stroke();
 
         this.player.render(this.#ctxBuffer);
 
