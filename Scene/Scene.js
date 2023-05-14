@@ -15,6 +15,8 @@ export default class Scene {
     init() {
         for(let type in ObjectType) {
             for(let obj in this.#arrGameObject[ObjectType[type]]) {
+                console.log(this);
+                console.log(obj);
                 obj.init();
             }
         }
@@ -23,7 +25,6 @@ export default class Scene {
         for(let type in ObjectType) {
             for(let obj in this.#arrGameObject[ObjectType[type]]) {
                 obj.update();
-                console.log(this);
             }
         }
     }
