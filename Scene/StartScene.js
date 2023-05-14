@@ -2,7 +2,7 @@ import Scene from './Scene.js';
 import Player from '../Player.js'
 import {ObjectType} from '../GameObject.js'
 
-export default class StartScene {
+export default class StartScene extends Scene {
     
     constructor() {super();}
 
