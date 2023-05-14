@@ -11,7 +11,7 @@ export default class SceneManager {
         return SceneManager.#instance;
     }
 
-    #arrScene;
+    #arrScene = [];
     #curScene;
 
     constructor() {
