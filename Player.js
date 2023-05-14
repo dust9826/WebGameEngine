@@ -22,10 +22,17 @@ export default class Player extends GameObject  {
         this.position.y += TimeManager.getInstance().DT * speed;
             
         if( KeyManager.getInstance().getKeyState(Key.A) == KeyState.HOLD)
+        {
+            // 좌우반전
+            this.img.style.transform = 'scaleX(-1)';
             this.position.x -= TimeManager.getInstance().DT * speed;
+        }
             
         if( KeyManager.getInstance().getKeyState(Key.D) == KeyState.HOLD)
+        {
+            this.img.style.transform = 'scaleX(1)';
             this.position.x += TimeManager.getInstance().DT * speed;
+        }
     }
 
     lateupdate() {
