@@ -12,10 +12,12 @@ export default class GameObject {
         this.#position = {x: 100, y: 100};
         this.#scale = {x:64, y:64};
     }
+    
     update() {
 
 
     }
+
     render(ctx) {
         ctx.drawImage(img
             , this.#position.x - this.#scale.x / 2
@@ -24,4 +26,13 @@ export default class GameObject {
             , this.#scale.y);
 
     }
+
+    get position() {return this.#position;}
+    set position(value) {this.#position = value;}
+
+    get scale() {return this.#scale;}
+    set scale(value) {this.#scale = value;}
+
+    get img() {return this.#img;}
+    set img(value) {this.#img = value;}
 }
