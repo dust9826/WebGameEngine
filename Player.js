@@ -1,4 +1,5 @@
 import KeyManager from './KeyManager.js';
+import {Key, KeyState} from './KeyManager.js';
 import GameObject from './GameObject.js';
 
 export default class Player extends GameObject  {
