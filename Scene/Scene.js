@@ -1,4 +1,4 @@
-import GameObject from './GameObject';
+import GameObject from './GameObject.js';
 import {ObjectType} from '../GameObject.js';
 
 export default class Scene {
