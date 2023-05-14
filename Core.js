@@ -1,6 +1,7 @@
 import TimeManager from './TimeManager.js';
 import KeyManager from './KeyManager.js';
 import {Key, KeyState} from './KeyManager.js';
+import Player from './GameObject';
 
 class Core {
     #canvasView;
@@ -13,6 +14,8 @@ class Core {
 
     #x;
   	#y;
+
+    player;
 
     constructor(canvasView) {
         this.#canvasView = canvasView;
@@ -37,6 +40,8 @@ class Core {
         TimeManager.getInstance().init();
         KeyManager.getInstance().init();
         
+        player = new Player();
+
         console.log('Init Core');
     }
 
@@ -44,19 +49,7 @@ class Core {
         TimeManager.getInstance().update();
         KeyManager.getInstance().update();
 
-        const speed = 300;
-
-        if( KeyManager.getInstance().getKeyState(Key.W) == KeyState.HOLD)
-            this.#y -= TimeManager.getInstance().DT * speed;
-            
-        if( KeyManager.getInstance().getKeyState(Key.S) == KeyState.HOLD)
-            this.#y += TimeManager.getInstance().DT * speed;
-            
-        if( KeyManager.getInstance().getKeyState(Key.A) == KeyState.HOLD)
-            this.#x -= TimeManager.getInstance().DT * speed;
-            
-        if( KeyManager.getInstance().getKeyState(Key.D) == KeyState.HOLD)
-            this.#x += TimeManager.getInstance().DT * speed;
+        player.update();
 
         this.render();
     }
@@ -68,6 +61,8 @@ class Core {
         this.#ctxBuffer.beginPath();
         this.#ctxBuffer.fillRect(this.#x, this.#y, 50, 50);
         this.#ctxBuffer.stroke();
+
+        player.render(this.#ctxBuffer);
 
         // double buffering
         this.#ctxView.clearRect(0, 0, this.#width, this.#height);
