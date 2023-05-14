@@ -5,7 +5,9 @@ export default class GameObject {
     #scale = new Vec2();
     #img = new Image();
 
-    constructor() {}
+    constructor() {
+        
+    }
 
     init() {
         this.#img.src = './Image/box.png';
