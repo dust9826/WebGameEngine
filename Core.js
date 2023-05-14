@@ -54,7 +54,7 @@ class Core {
     render() {
         this.#ctxBuffer.clearRect(0, 0, this.#width, this.#height);
 
-        SceneManager.getInstance().render(ctx);
+        SceneManager.getInstance().render(this.#ctxBuffer);
 
         // double buffering
         this.#ctxView.clearRect(0, 0, this.#width, this.#height);
