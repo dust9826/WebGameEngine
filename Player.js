@@ -2,7 +2,9 @@ import KeyManager from './KeyManager.js';
 import GameObject from './GameObject.js';
 
 export default class Player extends GameObject  {
-    constructor() {}
+    constructor() {
+        super();
+    }
 
     update() {
 
