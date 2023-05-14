@@ -58,6 +58,8 @@ export default class Player extends GameObject  {
         let missile = new Missile();
         missile.init();
         missile.direction = Vec2.GetDiff(KeyManager.getInstance().getMousePosition(), this.position);
+        missile.position.set(this.position.x, this.position.y);
+        missile.scale.set(16, 16);
 
         let curScene = SceneManager.getInstance().getCurrentScene();
         curScene.AddObject(missile, ObjectType.MISSILE);
