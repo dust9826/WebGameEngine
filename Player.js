@@ -9,13 +9,10 @@ export default class Player extends GameObject  {
     }
 
     init() {
-        console.log(this);
         super.init();
-        console.log(this);
     }
 
     update() {
-
         const speed = 300;
 
         if( KeyManager.getInstance().getKeyState(Key.W) == KeyState.HOLD)
@@ -29,6 +26,10 @@ export default class Player extends GameObject  {
             
         if( KeyManager.getInstance().getKeyState(Key.D) == KeyState.HOLD)
             this.position.x += TimeManager.getInstance().DT * speed;
+    }
+
+    lateupdate() {
+
     }
 
     render(ctx) {

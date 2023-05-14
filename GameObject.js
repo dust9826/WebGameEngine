@@ -19,6 +19,10 @@ export default class GameObject {
 
     }
 
+    lateupdate() {
+        
+    }
+
     render(ctx) {
         ctx.drawImage(this.#img
             , this.#position.x - this.#scale.x / 2
