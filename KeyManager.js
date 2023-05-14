@@ -102,7 +102,7 @@ export default class KeyManager {
         return this.#mouseState.eState;
     }
 
-    getMosuePosition() {
+    getMousePosition() {
         return this.#mousePosition;
     }
 
