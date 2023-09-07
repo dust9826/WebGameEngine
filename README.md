@@ -48,22 +48,13 @@ https://www.piskelapp.com/
           gl.uniform2fv(location, v);
         };
       }
-      ...
+      중략
       if (type === gl.FLOAT_MAT2) {
         return function(v) {
           gl.uniformMatrix2fv(location, false, v);
         };
       }
-      if (type === gl.FLOAT_MAT3) {
-        return function(v) {
-          gl.uniformMatrix3fv(location, false, v);
-        };
-      }
-      if (type === gl.FLOAT_MAT4) {
-        return function(v) {
-          gl.uniformMatrix4fv(location, false, v);
-        };
-      }
+      중략
       if ((type === gl.SAMPLER_2D || type === gl.SAMPLER_CUBE) && isArray) {
         const units = [];
         for (let ii = 0; ii < info.size; ++ii) {
@@ -109,4 +100,8 @@ https://www.piskelapp.com/
     }
     return uniformSetters;
   }
+
+
+
+      
     </code></pre>
