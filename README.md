@@ -18,6 +18,20 @@ https://www.piskelapp.com/
 --disable-web-security --disable-gpu --user-data-dir=~/tmp 
 
 <pre><code> 
+    /**
+   * @typedef {Object.<string, function>} Setters
+   */
+
+  /**
+   * Creates setter functions for all uniforms of a shader
+   * program.
+   *
+   * @see {@link module:webgl-utils.setUniforms}
+   *
+   * @param {WebGLProgram} program the program to create setters for.
+   * @returns {Object.<string, function>} an object with a setter by name for each uniform
+   * @memberOf module:webgl-utils
+   */
   function createUniformSetters(gl, program) {
     let textureUnit = 0;
 
@@ -48,13 +62,17 @@ https://www.piskelapp.com/
           gl.uniform2fv(location, v);
         };
       }
-      중략
+  
+      -----------------중략-----------------
+  
       if (type === gl.FLOAT_MAT2) {
         return function(v) {
           gl.uniformMatrix2fv(location, false, v);
         };
       }
-      중략
+  
+      -----------------중략-----------------
+  
       if ((type === gl.SAMPLER_2D || type === gl.SAMPLER_CUBE) && isArray) {
         const units = [];
         for (let ii = 0; ii < info.size; ++ii) {
@@ -102,6 +120,111 @@ https://www.piskelapp.com/
   }
 
 
+  /**
+   * Creates setter functions for all attributes of a shader
+   * program. You can pass this to {@link module:webgl-utils.setBuffersAndAttributes} to set all your buffers and attributes.
+   *
+   * @see {@link module:webgl-utils.setAttributes} for example
+   * @param {WebGLProgram} program the program to create setters for.
+   * @return {Object.<string, function>} an object with a setter for each attribute by name.
+   * @memberOf module:webgl-utils
+   */
+ function createAttributeSetters(gl, program) {
+    const attribSetters = {
+    };
 
-      
+    function createAttribSetter(index) {
+      return function(b) {
+          if (b.value) {
+            gl.disableVertexAttribArray(index);
+            switch (b.value.length) {
+              case 4:
+                gl.vertexAttrib4fv(index, b.value);
+                break;
+              case 3:
+                gl.vertexAttrib3fv(index, b.value);
+                break;
+              case 2:
+                gl.vertexAttrib2fv(index, b.value);
+                break;
+              case 1:
+                gl.vertexAttrib1fv(index, b.value);
+                break;
+              default:
+                throw new Error('the length of a float constant value must be between 1 and 4!');
+            }
+          } else {
+            gl.bindBuffer(gl.ARRAY_BUFFER, b.buffer);
+            gl.enableVertexAttribArray(index);
+            gl.vertexAttribPointer(
+                index, b.numComponents || b.size, b.type || gl.FLOAT, b.normalize || false, b.stride || 0, b.offset || 0);
+          }
+        };
+    }
+
+    const numAttribs = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
+    for (let ii = 0; ii < numAttribs; ++ii) {
+      const attribInfo = gl.getActiveAttrib(program, ii);
+      if (!attribInfo) {
+        break;
+      }
+      const index = gl.getAttribLocation(program, attribInfo.name);
+      attribSetters[attribInfo.name] = createAttribSetter(index);
+    }
+
+    return attribSetters;
+  }
+
+  /**
+   * @typedef {Object} BufferInfo
+   * @property {number} numElements The number of elements to pass to `gl.drawArrays` or `gl.drawElements`.
+   * @property {WebGLBuffer} [indices] The indices `ELEMENT_ARRAY_BUFFER` if any indices exist.
+   * @property {Object.<string, module:webgl-utils.AttribInfo>} attribs The attribs approriate to call `setAttributes`
+   * @memberOf module:webgl-utils
+   */
+     
+  function createBufferInfoFromArrays(gl, arrays, opt_mapping) {
+    const bufferInfo = {
+      attribs: createAttribsFromArrays(gl, arrays, opt_mapping),
+    };
+    let indices = arrays.indices;
+    if (indices) {
+      indices = makeTypedArray(indices, 'indices');
+      bufferInfo.indices = createBufferFromTypedArray(gl, indices, gl.ELEMENT_ARRAY_BUFFER);
+      bufferInfo.numElements = indices.length;
+    } else {
+      bufferInfo.numElements = getNumElementsFromNonIndexedArrays(arrays);
+    }
+
+    return bufferInfo;
+  }
+
+function setUniforms(setters, ...values) {
+    setters = setters.uniformSetters || setters;
+    for (const uniforms of values) {
+      Object.keys(uniforms).forEach(function(name) {
+        const setter = setters[name];
+        if (setter) {
+          setter(uniforms[name]);
+        }
+      });
+    }
+  }
+
+function setBuffersAndAttributes(gl, setters, buffers) {
+    setAttributes(setters, buffers.attribs);
+    if (buffers.indices) {
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.indices);
+    }
+  }
+
+function setAttributes(setters, attribs) {
+    setters = setters.attribSetters || setters;
+    Object.keys(attribs).forEach(function(name) {
+      const setter = setters[name];
+      if (setter) {
+        setter(attribs[name]);
+      }
+    });
+  }
     </code></pre>
